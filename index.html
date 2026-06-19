@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cuponera Digital · Fundación Hogar Salud A.C.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,700;0,900;1,700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+  <!-- ══════════════════════════════════════════
+       NAVBAR — fija en todas las vistas
+  ══════════════════════════════════════════════ -->
+  <header class="navbar" role="banner">
+    <div class="navbar__inner">
+
+      <!-- Selector de ciudad -->
+      <div class="navbar__search">
+        <span class="navbar__search-icon" aria-hidden="true"></span>
+        <select class="navbar__city-select" aria-label="Buscar por ciudad">
+          <option value="">Buscar por Ciudad</option>
+          <option value="sma">San Miguel de Allende</option>
+          <option value="dh">Dolores Hidalgo</option>
+          <option value="gto">Guanajuato Capital</option>
+        </select>
+      </div>
+
+      <!-- Navegación principal -->
+      <nav class="navbar__nav" role="navigation" aria-label="Navegación principal">
+        <a href="#" class="nav-link" data-view="inicio" aria-current="page">Inicio</a>
+        <a href="#" class="nav-link" data-view="categorias">Categorías</a>
+        <a href="#" class="nav-link" data-view="cupones-dia">Cupones del Día</a>
+        <a href="#" class="nav-link" data-view="quienes-somos">Quiénes somos</a>
+
+        <!-- Mi Cuenta: oculta hasta registro -->
+        <a href="#"
+           class="nav-link nav-link--cuenta"
+           id="nav-mi-cuenta"
+           data-view="mi-cuenta"
+           style="display:none"
+           aria-hidden="true">
+          <span class="nav-link__avatar" aria-hidden="true">👤</span>
+          Mi Cuenta
+        </a>
+      </nav>
+
+    </div>
+  </header>
+
+  <!-- ══════════════════════════════════════════
+       VISTA: INICIO (pública)
+  ══════════════════════════════════════════════ -->
+  <main id="view-inicio" class="view view--active" role="main">
+
+    <!-- Hero / Banner -->
+    <section class="hero">
+      <div class="hero__content">
+        <p class="hero__eyebrow">Fundación Hogar Salud A.C.</p>
+        <h1 class="hero__title">Cuponera <em>Digital</em> Comunitaria</h1>
+        <p class="hero__sub">
+          Descuentos exclusivos en negocios locales para quienes más lo necesitan.
+          Apoya la economía de tu comunidad con cada compra.
+        </p>
+        <div class="hero__actions">
+          <a href="#" class="btn btn--primary" data-view="categorias">Explorar cupones</a>
+          <a href="#" class="btn btn--outline" data-view="quienes-somos">Conocer la fundación</a>
+        </div>
+      </div>
+      <div class="hero__badge" aria-hidden="true">
+        <span class="hero__badge-num">+80</span>
+        <span class="hero__badge-label">comercios<br>aliados</span>
+      </div>
+    </section>
+
+    <!-- Categorías destacadas -->
+    <section class="section" aria-labelledby="cats-title">
+      <div class="section__header">
+        <h2 class="section__title" id="cats-title">Categorías disponibles</h2>
+        <a href="#" class="section__more" data-view="categorias">Ver todas →</a>
+      </div>
+      <div class="cats-grid">
+        <div class="cat-card" data-category="canasta-basica" role="button" tabindex="0" style="cursor: pointer;">
+          <span class="cat-card__icon" aria-hidden="true">🛒</span>
+          <span class="cat-card__name">Canasta Básica</span>
+          <span class="cat-card__count">3 cupones</span>
+        </div>
+        <div class="cat-card" data-category="restaurantes" role="button" tabindex="0" style="cursor: pointer;">
+          <span class="cat-card__icon" aria-hidden="true">🍽️</span>
+          <span class="cat-card__name">Restaurantes</span>
+          <span class="cat-card__count">1 cupón</span>
+        </div>
+        <div class="cat-card" data-category="farmacias" role="button" tabindex="0" style="cursor: pointer;">
+          <span class="cat-card__icon" aria-hidden="true">💊</span>
+          <span class="cat-card__name">Farmacias</span>
+          <span class="cat-card__count">2 cupones</span>
+        </div>
+        <div class="cat-card" data-category="ropa-calzado" role="button" tabindex="0" style="cursor: pointer;">
+          <span class="cat-card__icon" aria-hidden="true">👗</span>
+          <span class="cat-card__name">Ropa y Calzado</span>
+          <span class="cat-card__count">1 cupón</span>
+        </div>
+        <div class="cat-card" data-category="nieves-dulces" role="button" tabindex="0" style="cursor: pointer;">
+          <span class="cat-card__icon" aria-hidden="true">🍦</span>
+          <span class="cat-card__name">Nieves y Dulces</span>
+          <span class="cat-card__count">2 cupones</span>
+        </div>
+        <div class="cat-card" data-category="hogar" role="button" tabindex="0" style="cursor: pointer;">
+          <span class="cat-card__icon" aria-hidden="true">🏠</span>
+          <span class="cat-card__name">Hogar</span>
+          <span class="cat-card__count">0 cupones</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Cupones del día (muestra pública) -->
+    <section class="section" aria-labelledby="daily-title">
+      <div class="section__header">
+        <h2 class="section__title" id="daily-title">Cupones del Día</h2>
+      </div>
+      <div class="coupons-grid" id="coupons-grid">
+
+        <!-- SAN MIGUEL DE ALLENDE -->
+        <article class="coupon-card coupon-card--purple" data-city="sma" data-category="canasta-basica">
+          <div class="coupon-card__stripe"></div>
+          <div class="coupon-card__body">
+            <div class="coupon-card__head">
+              <div class="coupon-card__logo" aria-hidden="true">ST</div>
+              <div>
+                <p class="coupon-card__name">Super Todo la Guadalupe</p>
+                <p class="coupon-card__cat">Canasta Básica</p>
+              </div>
+              <span class="coupon-card__pct">15%</span>
+            </div>
+            <p class="coupon-card__desc">15% de Descuento en Canasta Básica seleccionada.</p>
+            <p class="coupon-card__validity">
+              <span class="validity-dot validity-dot--red"></span>
+              Vence en 3 días
+            </p>
+          </div>
+          <div class="coupon-card__footer">
+            <button class="btn btn--green btn--sm" onclick="solicitarAcceso()">Obtener Cupón</button>
+          </div>
+        </article>
+
+        <article class="coupon-card coupon-card--pink" data-city="sma" data-category="nieves-dulces">
+          <div class="coupon-card__stripe"></div>
+          <div class="coupon-card__body">
+            <div class="coupon-card__head">
+              <div class="coupon-card__logo" aria-hidden="true">PN</div>
+              <div>
+                <p class="coupon-card__name">Paletería Nievería</p>
+                <p class="coupon-card__cat">Nieves y Dulces</p>
+              </div>
+              <span class="coupon-card__pct">2x1</span>
+            </div>
+            <p class="coupon-card__desc">Promoción 2x1 en paletas y nieves artesanales.</p>
+            <p class="coupon-card__validity">
+              <span class="validity-dot validity-dot--red"></span>
+              Vence en 12 días
+            </p>
+          </div>
+          <div class="coupon-card__footer">
+            <button class="btn btn--green btn--sm" onclick="solicitarAcceso()">Obtener Cupón</button>
+          </div>
+        </article>
+
+        <article class="coupon-card coupon-card--blue" data-city="sma" data-category="farmacias">
+          <div class="coupon-card__stripe"></div>
+          <div class="coupon-card__body">
+            <div class="coupon-card__head">
+              <div class="coupon-card__logo" aria-hidden="true">FM</div>
+              <div>
+                <p class="coupon-card__name">Farmacia Mi Salud</p>
+                <p class="coupon-card__cat">Farmacias</p>
+              </div>
+              <span class="coupon-card__pct">20%</span>
+            </div>
+            <p class="coupon-card__desc">20% en medicamentos genéricos con cupón.</p>
+            <p class="coupon-card__validity">
+              <span class="validity-dot validity-dot--orange"></span>
+              Vence en 20 días
+            </p>
+          </div>
+          <div class="coupon-card__footer">
+            <button class="btn btn--green btn--sm" onclick="solicitarAcceso()">Obtener Cupón</button>
+          </div>
+        </article>
+
+        <!-- DOLORES HIDALGO -->
+        <article class="coupon-card coupon-card--purple" data-city="dh" data-category="canasta-basica">
+          <div class="coupon-card__stripe"></div>
+          <div class="coupon-card__body">
+            <div class="coupon-card__head">
+              <div class="coupon-card__logo" aria-hidden="true">LA</div>
+              <div>
+                <p class="coupon-card__name">La Abundancia</p>
+                <p class="coupon-card__cat">Canasta Básica</p>
+              </div>
+              <span class="coupon-card__pct">12%</span>
+            </div>
+            <p class="coupon-card__desc">12% en productos de canasta básica.</p>
+            <p class="coupon-card__validity">
+              <span class="validity-dot validity-dot--red"></span>
+              Vence en 5 días
+            </p>
+          </div>
+          <div class="coupon-card__footer">
+            <button class="btn btn--green btn--sm" onclick="solicitarAcceso()">Obtener Cupón</button>
+          </div>
+        </article>
+
+        <article class="coupon-card coupon-card--orange" data-city="dh" data-category="restaurantes">
+          <div class="coupon-card__stripe"></div>
+          <div class="coupon-card__body">
+            <div class="coupon-card__head">
+              <div class="coupon-card__logo" aria-hidden="true">CM</div>
+              <div>
+                <p class="coupon-card__name">Comedor Tradicional</p>
+                <p class="coupon-card__cat">Restaurantes</p>
+              </div>
+              <span class="coupon-card__pct">25%</span>
+            </div>
+            <p class="coupon-card__desc">25% en tu comida de lunes a viernes.</p>
+            <p class="coupon-card__validity">
+              <span class="validity-dot validity-dot--red"></span>
+              Vence en 30 días
+            </p>
+          </div>
+          <div class="coupon-card__footer">
+            <button class="btn btn--green btn--sm" onclick="solicitarAcceso()">Obtener Cupón</button>
+          </div>
+        </article>
+
+        <article class="coupon-card coupon-card--purple" data-city="dh" data-category="ropa-calzado">
+          <div class="coupon-card__stripe"></div>
+          <div class="coupon-card__body">
+            <div class="coupon-card__head">
+              <div class="coupon-card__logo" aria-hidden="true">RP</div>
+              <div>
+                <p class="coupon-card__name">Ropa Hispana</p>
+                <p class="coupon-card__cat">Ropa y Calzado</p>
+              </div>
+              <span class="coupon-card__pct">3x2</span>
+            </div>
+            <p class="coupon-card__desc">Compra 3 prendas y paga solo 2.</p>
+            <p class="coupon-card__validity">
+              <span class="validity-dot validity-dot--orange"></span>
+              Vence en 8 días
+            </p>
+          </div>
+          <div class="coupon-card__footer">
+            <button class="btn btn--green btn--sm" onclick="solicitarAcceso()">Obtener Cupón</button>
+          </div>
+        </article>
+
+        <!-- GUANAJUATO CAPITAL -->
+        <article class="coupon-card coupon-card--blue" data-city="gto" data-category="canasta-basica">
+          <div class="coupon-card__stripe"></div>
+          <div class="coupon-card__body">
+            <div class="coupon-card__head">
+              <div class="coupon-card__logo" aria-hidden="true">MC</div>
+              <div>
+                <p class="coupon-card__name">Mercado Central</p>
+                <p class="coupon-card__cat">Canasta Básica</p>
+              </div>
+              <span class="coupon-card__pct">10%</span>
+            </div>
+            <p class="coupon-card__desc">10% en verduras y frutas frescas.</p>
+            <p class="coupon-card__validity">
+              <span class="validity-dot validity-dot--red"></span>
+              Vence en 2 días
+            </p>
+          </div>
+          <div class="coupon-card__footer">
+            <button class="btn btn--green btn--sm" onclick="solicitarAcceso()">Obtener Cupón</button>
+          </div>
+        </article>
+
+        <article class="coupon-card coupon-card--pink" data-city="gto" data-category="nieves-dulces">
+          <div class="coupon-card__stripe"></div>
+          <div class="coupon-card__body">
+            <div class="coupon-card__head">
+              <div class="coupon-card__logo" aria-hidden="true">DT</div>
+              <div>
+                <p class="coupon-card__name">Dulcería Típica</p>
+                <p class="coupon-card__cat">Nieves y Dulces</p>
+              </div>
+              <span class="coupon-card__pct">30%</span>
+            </div>
+            <p class="coupon-card__desc">30% en dulces típicos y conservas caseras.</p>
+            <p class="coupon-card__validity">
+              <span class="validity-dot validity-dot--red"></span>
+              Vence en 7 días
+            </p>
+          </div>
+          <div class="coupon-card__footer">
+            <button class="btn btn--green btn--sm" onclick="solicitarAcceso()">Obtener Cupón</button>
+          </div>
+        </article>
+
+        <article class="coupon-card coupon-card--orange" data-city="gto" data-category="farmacias">
+          <div class="coupon-card__stripe"></div>
+          <div class="coupon-card__body">
+            <div class="coupon-card__head">
+              <div class="coupon-card__logo" aria-hidden="true">FG</div>
+              <div>
+                <p class="coupon-card__name">Farmacia Guadalupana</p>
+                <p class="coupon-card__cat">Farmacias</p>
+              </div>
+              <span class="coupon-card__pct">15%</span>
+            </div>
+            <p class="coupon-card__desc">15% en vitaminas y suplementos.</p>
+            <p class="coupon-card__validity">
+              <span class="validity-dot validity-dot--orange"></span>
+              Vence en 15 días
+            </p>
+          </div>
+          <div class="coupon-card__footer">
+            <button class="btn btn--green btn--sm" onclick="solicitarAcceso()">Obtener Cupón</button>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- ── MÓDULO DE REGISTRO DE CORREO ── -->
+    <section class="registro-banner" id="registro-section" aria-labelledby="reg-title">
+      <div class="registro-banner__deco" aria-hidden="true"></div>
+      <div class="registro-banner__content">
+        <div class="registro-banner__text">
+          <p class="registro-banner__eyebrow">Acceso gratuito para beneficiarios</p>
+          <h2 class="registro-banner__title" id="reg-title">
+            Registra tu correo y accede<br>a <em>todos tus cupones</em>
+          </h2>
+          <p class="registro-banner__sub">
+            Sin contraseñas. Sin complicaciones. Solo ingresa tu correo
+            y tendrás acceso inmediato a tu perfil de beneficiario.
+          </p>
+        </div>
+
+        <form class="registro-form" id="registro-form" novalidate
+              role="form" aria-label="Formulario de registro">
+          <div class="registro-form__field">
+            <label class="registro-form__label" for="input-email">
+              Correo electrónico
+            </label>
+            <input
+              class="registro-form__input"
+              type="email"
+              id="input-email"
+              name="email"
+              placeholder="tucorreo@ejemplo.com"
+              autocomplete="email"
+              required
+              aria-required="true"
+              aria-describedby="email-error"
+            />
+            <p class="registro-form__error" id="email-error" role="alert" aria-live="polite"></p>
+          </div>
+          <button class="btn btn--primary btn--lg btn--full" type="submit" id="btn-registrar">
+            <span class="btn__icon" aria-hidden="true">🎟️</span>
+            Registrarme para ver mis cupones
+          </button>
+          <p class="registro-form__disclaimer">
+            🔒 Tu información está protegida. No compartimos tus datos.
+          </p>
+        </form>
+      </div>
+    </section>
+
+  </main><!-- /view-inicio -->
+
+
+  <!-- ══════════════════════════════════════════
+       VISTA: MI CUENTA (solo usuarios registrados)
+  ══════════════════════════════════════════════ -->
+  <main id="view-mi-cuenta" class="view" role="main" aria-label="Mi cuenta">
+
+    <div class="cuenta-layout">
+
+      <!-- ── Columna izquierda: Perfil del beneficiario ── -->
+      <aside class="perfil-card" aria-label="Información del beneficiario">
+
+        <div class="perfil-card__avatar" aria-label="Avatar de usuario">
+          <span aria-hidden="true">👤</span>
+        </div>
+
+        <h2 class="perfil-card__title">Información del Beneficiario</h2>
+
+        <dl class="perfil-card__data">
+          <dt>Nombre completo:</dt>
+          <dd id="perfil-nombre">Usuario General</dd>
+
+          <dt>Correo:</dt>
+          <dd id="perfil-email" class="perfil-card__email-val">—</dd>
+
+          <dt>ID de Fundación:</dt>
+          <dd class="perfil-card__id">#FHS-2026-8942</dd>
+
+
+
+        <button class="btn btn--outline-purple btn--sm btn--full" id="btn-cerrar-sesion">
+          Cerrar sesión
+        </button>
+
+      </aside>
+
+      <!-- ── Columna derecha: Cupones activos ── -->
+      <section class="cupones-activos" aria-labelledby="cupones-title">
+
+        <h2 class="cupones-activos__title" id="cupones-title">
+          Mis Cupones Disponibles y Activos
+        </h2>
+        <p class="cupones-activos__sub">
+          A continuación se listan las ofertas guardadas o listas para su validación inmediata.
+        </p>
+
+        <!-- Cupón 1 -->
+        <article class="cupon-item cupon-item--purple" aria-label="Cupón Super Todo la Guadalupe">
+          <div class="cupon-item__stripe"></div>
+          <div class="cupon-item__body">
+            <div class="cupon-item__info">
+              <h3 class="cupon-item__name">Super Todo la Guadalupe</h3>
+              <p class="cupon-item__desc">15% de Descuento en Canasta Básica</p>
+              <p class="cupon-item__codigo">
+                CÓDIGO: <strong class="cupon-item__codigo-val">STG-8942</strong>
+              </p>
+            </div>
+            <div class="cupon-item__actions">
+              <p class="cupon-item__vence">Vence en 3 días</p>
+              <button class="btn btn--green btn--mostrar"
+                      data-codigo="STG-8942"
+                      onclick="mostrarCodigo(this)">
+                Mostrar Código
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Cupón 2 -->
+        <article class="cupon-item cupon-item--pink" aria-label="Cupón Paletería Nievería">
+          <div class="cupon-item__stripe"></div>
+          <div class="cupon-item__body">
+            <div class="cupon-item__info">
+              <h3 class="cupon-item__name">Paletería Nievería</h3>
+              <p class="cupon-item__desc">Promoción Especial 2x1</p>
+              <p class="cupon-item__codigo">
+                CÓDIGO: <strong class="cupon-item__codigo-val">PAL-3110</strong>
+              </p>
+            </div>
+            <div class="cupon-item__actions">
+              <p class="cupon-item__vence">Vence en 12 días</p>
+              <button class="btn btn--green btn--mostrar"
+                      data-codigo="PAL-3110"
+                      onclick="mostrarCodigo(this)">
+                Mostrar Código
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Cupón 3 -->
+        <article class="cupon-item cupon-item--blue" aria-label="Cupón Farmacia Mi Salud">
+          <div class="cupon-item__stripe"></div>
+          <div class="cupon-item__body">
+            <div class="cupon-item__info">
+              <h3 class="cupon-item__name">Farmacia Mi Salud</h3>
+              <p class="cupon-item__desc">20% en medicamentos genéricos</p>
+              <p class="cupon-item__codigo">
+                CÓDIGO: <strong class="cupon-item__codigo-val">FMS-0821</strong>
+              </p>
+            </div>
+            <div class="cupon-item__actions">
+              <p class="cupon-item__vence cupon-item__vence--ok">Vence en 20 días</p>
+              <button class="btn btn--green btn--mostrar"
+                      data-codigo="FMS-0821"
+                      onclick="mostrarCodigo(this)">
+                Mostrar Código
+              </button>
+            </div>
+          </div>
+        </article>
+
+      </section>
+
+    </div><!-- /cuenta-layout -->
+
+  </main><!-- /view-mi-cuenta -->
+
+
+  <!-- ══════════════════════════════════════════
+       VISTA: QUIÉNES SOMOS (pública)
+  ══════════════════════════════════════════════ -->
+  <main id="view-quienes-somos" class="view" role="main" aria-label="Quiénes somos">
+
+    <article class="quienes-article">
+
+      <h1 class="quienes-article__h1">¿Quiénes somos?</h1>
+
+      <p class="quienes-article__p">
+        Somos la sección publicitaria oficial de la Fundación Hogar Salud.<br />
+        Nacimos con el propósito de trasladar las páginas de nuestra tradicional revista
+        impresa al entorno digital, creando un espacio donde los negocios locales y la
+        comunidad se encuentran para apoyarse mutuamente.
+      </p>
+
+      <h2 class="quienes-article__h2">Conoce nuestra Historia</h2>
+
+      <p class="quienes-article__p">
+        Seguramente ya nos conoces por nuestra revista física, donde mes con mes te
+        compartimos lo mejor de los comercios de nuestra región.<br />
+        Hoy, de la mano de Fundación Hogar Salud, damos el salto digital para estar
+        más cerca de ti.
+      </p>
+
+      <h2 class="quienes-article__h2">¿Qué hacemos?</h2>
+
+      <p class="quienes-article__p">
+        Creamos esta cuponera digital para que puedas descubrir y conectar con
+        negocios locales comprometidos con el corazón de nuestra comunidad. Cada
+        negocio colaborador que ves aquí no solo ofrece productos y servicios de
+        excelente calidad, sino que también se suma a nuestra causa ofreciendo
+        descuentos especiales para quienes más lo necesitan.
+      </p>
+
+      <p class="quienes-article__p">
+        Al comprar en estos negocios, no solo ahorras, también apoyas una red de
+        solidaridad local.
+      </p>
+
+      <!-- CTA dentro de la página -->
+      <div class="quienes-article__cta">
+        <button class="btn btn--primary" data-view="inicio">
+          Ver cupones disponibles
+        </button>
+      </div>
+
+    </article>
+
+  </main><!-- /view-quienes-somos -->
+
+
+  <!-- ══════════════════════════════════════════
+       VISTA: CATEGORÍAS (pública, placeholder)
+  ══════════════════════════════════════════════ -->
+  <main id="view-categorias" class="view" role="main" aria-label="Categorías">
+    <div class="placeholder-view">
+      <span class="placeholder-view__icon" aria-hidden="true">🏷️</span>
+      <h2 class="placeholder-view__title">Todas las Categorías</h2>
+      <p class="placeholder-view__sub">Próximamente disponible con el catálogo completo.</p>
+      <button class="btn btn--primary" data-view="inicio">Volver al inicio</button>
+    </div>
+  </main>
+
+  <!-- ══════════════════════════════════════════
+       VISTA: CUPONES DEL DÍA (placeholder)
+  ══════════════════════════════════════════════ -->
+  <main id="view-cupones-dia" class="view" role="main" aria-label="Cupones del día">
+    <div class="placeholder-view">
+      <span class="placeholder-view__icon" aria-hidden="true">🎟️</span>
+      <h2 class="placeholder-view__title">Cupones del Día</h2>
+      <p class="placeholder-view__sub">Catálogo completo en construcción.</p>
+      <button class="btn btn--primary" data-view="inicio">Volver al inicio</button>
+    </div>
+  </main>
+
+
+  <!-- ══════════════════════════════════════════
+       MODAL: "Mostrar Código" en pantalla completa
+  ══════════════════════════════════════════════ -->
+  <div class="modal-overlay" id="modal-codigo" role="dialog"
+       aria-modal="true" aria-labelledby="modal-titulo" hidden>
+    <div class="modal">
+      <button class="modal__close" id="modal-cerrar" aria-label="Cerrar modal">✕</button>
+      <div class="modal__icon" aria-hidden="true">🎟️</div>
+      <h3 class="modal__title" id="modal-titulo">Tu Código de Cupón</h3>
+      <p class="modal__sub">Muestra esta pantalla en el establecimiento</p>
+      <div class="modal__code" id="modal-code-val" aria-live="polite">—</div>
+      <p class="modal__inst">Presenta este código junto con tu cupón digital de la Fundación.</p>
+      <p class="modal__fundacion">Fundación Hogar Salud A.C.</p>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════
+       FOOTER — global en todas las vistas
+  ══════════════════════════════════════════════ -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="site-footer__inner">
+      <p class="site-footer__brand">Fundación Hogar Salud A.C.</p>
+      <p class="site-footer__tagline">Cuponera Digital Comunitaria</p>
+      <p class="site-footer__contact">
+        Correo de contacto:
+        <a href="mailto:fundacion.hogarsalud@gmail.com" class="site-footer__email">
+          fundacion.hogarsalud@gmail.com
+        </a>
+      </p>
+      <p class="site-footer__copy">
+        © 2026 Fundación Hogar Salud A.C. · Todos los derechos reservados.
+      </p>
+    </div>
+  </footer>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
